@@ -1,9 +1,9 @@
 import React from 'react'
-import Catalog from "../catalog/catalog";
+import CatalogContainer from "../../containers";
 
 const CatalogPage = () => {
     return (
-      <Catalog/>
+        <CatalogContainer/>
     )
 }
 
