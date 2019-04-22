@@ -5,6 +5,12 @@ const devicesLoaded = (newDevices) => {
         payload: newDevices
     }
 }
+const deviceLoaded = (newDevice) => {
+    return {
+        type: 'FETCH_DEVICE_LOADED',
+        payload: newDevice
+    }
+}
 const devicesRequested = () => {
     return {
         type: 'FETCH_DEVICES_REQUESTED'
@@ -18,13 +24,21 @@ const devicesError = (error) => {
     }
 }
 
-const fetchDevices = (getDevice, dispatch) => () => {
+const fetchDevices = (getDevices, dispatch) => () => {
     dispatch(devicesRequested())
-    getDevice()
+    getDevices()
         .then((data) => dispatch(devicesLoaded(data)))
+        .catch((err) => dispatch(devicesError(err)))
+}
+
+const fetchDevice = (getDevice, deviceClass, deviceId, dispatch) => () => {
+    dispatch(devicesRequested())
+    getDevice(deviceClass, deviceId)
+        .then((data) => dispatch(deviceLoaded(data)))
         .catch((err) => dispatch(devicesError(err)))
 }
 
 export {
   fetchDevices,
+  fetchDevice
 };

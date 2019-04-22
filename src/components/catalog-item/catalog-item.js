@@ -1,10 +1,18 @@
 import React from 'react'
 import './catalog-item.sass'
+import {withRouter} from "react-router-dom";
 
-const CatalogItem = ({ phone }) => {
-    const {id, model, price, img} = phone
+const CatalogItem = ({ device, history }) => {
+    const { deviceClass, deviceId, model, price, img} = device
     return (
-        <div key = {id} id={id} className={'catalog-item'}>
+        <div
+            key = {deviceId}
+            id={deviceId}
+            className={'catalog-item'}
+            onClick={() => {
+                const newPath = `/${deviceClass}/${deviceId}`
+                history.push(newPath)
+            }}>
             <div className="catalog-content">
                 <img src={img} alt="model"/>
                 <div className="name">{model}</div>
@@ -14,4 +22,4 @@ const CatalogItem = ({ phone }) => {
     )
 }
 
-export default CatalogItem
+export default withRouter(CatalogItem);

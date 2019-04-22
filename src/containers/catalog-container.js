@@ -20,8 +20,7 @@ class CatalogContainer extends Component {
     }
 
     render() {
-        console.log("11111", this.props)
-        const { phones, loading, error } = this.props
+        const { devices, loading, error } = this.props
 
         if (loading) {
             return <Spinner/>
@@ -31,11 +30,11 @@ class CatalogContainer extends Component {
             return <ErrorIndicator/>
         }
 
-        return <Catalog phones = {phones} />
+        return <Catalog devices = {devices} />
     }
 }
-const mapStateToProps = ({ phones, loading, error }) => {
-    return { phones, loading, error }
+const mapStateToProps = ({ deviceList:{devices, loading, error} }) => {
+    return { devices, loading, error }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {

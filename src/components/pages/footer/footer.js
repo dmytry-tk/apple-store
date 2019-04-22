@@ -6,7 +6,10 @@ import logo from "./apple-logo.png"
 const Footer = () => {
     return(
         <footer className = "footer">
-            footer
+            <div className="footer-container">
+                <div className="item logo"><img src={logo} alt=""/></div>
+
+            </div>
         </footer>
     )
 }

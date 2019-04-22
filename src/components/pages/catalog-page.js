@@ -1,5 +1,5 @@
 import React from 'react'
-import CatalogContainer from "../../containers";
+import CatalogContainer from "../../containers/catalog-container";
 
 const CatalogPage = () => {
     return (

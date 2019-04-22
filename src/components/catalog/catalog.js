@@ -3,14 +3,14 @@ import './catalog.sass'
 import CatalogItem from "../catalog-item";
 import './catalog.sass'
 
-const Catalog = ({ phones }) => {
+const Catalog = ({ devices }) => {
     return(
         <div className = "catalog wrap">
             {
-                phones.map((phone) => {
+                devices.map((device) => {
                     return (
                         <CatalogItem
-                            phone = {phone}/>
+                            device = {device}/>
                     )
                 })
             }

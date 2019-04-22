@@ -5,7 +5,7 @@ import Header from "../pages/header";
 import { HomePage, CatalogPage } from "../pages";
 import Footer from "../pages/footer";
 import {CatalogIpads, CatalogIphones} from "../sw-components/device-catalog";
-import ProductCart from "../product-cart/product-cart";
+import ProductCartContainer from "../../containers/product-cart-container";
 
 const App = () => {
     return (
@@ -25,9 +25,11 @@ const App = () => {
                     component={CatalogIpads}
                     exact />
                 <Route
-                    path={"/mac/"}
-                    component={<ProductCart class = {"iphone"} id = {"101"}/>}
-                    exact />
+                    path={"/:class/:id"}
+                    render={({match, location, history}) => {
+                        return <ProductCartContainer deviceClass = {match.params.class} deviceId = {match.params.id}/>
+                    }}
+                    exact/>
             </Switch>
             {/*<Footer />*/}
         </div>
