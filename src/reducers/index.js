@@ -1,3 +1,5 @@
+
+
 const initialState = {
     phones: [],
     loading: true,
@@ -6,19 +8,19 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'PHONES_REQUESTED':
+        case 'FETCH_DEVICES_REQUESTED':
             return {
                 books: [],
                 loading: true,
                 error: null
             }
-        case 'PHONES_LOADED':
+        case 'FETCH_DEVICES_LOADED':
             return {
                 phones: action.payload,
                 loading: false,
                 error: null
             };
-        case 'BOOKS_ERROR':
+        case 'FETCH_DEVICES_ERROR':
             return {
                 phones: [],
                 loading: false,
@@ -29,5 +31,4 @@ const reducer = (state = initialState, action) => {
     }
     return state;
 }
-
 export default reducer

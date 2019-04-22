@@ -1,25 +1,30 @@
 
-const phonesLoaded = (newBooks) => {
+const devicesLoaded = (newDevices) => {
     return {
-        type: 'PHONES_LOADED',
-        payload: newBooks
+        type: 'FETCH_DEVICES_LOADED',
+        payload: newDevices
     }
 }
-const phonesRequested = () => {
+const devicesRequested = () => {
     return {
-        type: 'PHONES_REQUESTED'
+        type: 'FETCH_DEVICES_REQUESTED'
     }
 }
 
-const phonesError = (error) => {
+const devicesError = (error) => {
     return{
-        type: 'BOOKS_ERROR',
+        type: 'FETCH_DEVICES_ERROR',
         payload: error
     }
 }
 
+const fetchDevices = (getDevice, dispatch) => () => {
+    dispatch(devicesRequested())
+    getDevice()
+        .then((data) => dispatch(devicesLoaded(data)))
+        .catch((err) => dispatch(devicesError(err)))
+}
+
 export {
-  phonesLoaded,
-  phonesRequested,
-  phonesError
+  fetchDevices,
 };

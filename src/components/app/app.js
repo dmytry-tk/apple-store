@@ -4,6 +4,8 @@ import { Route, Switch } from 'react-router-dom'
 import Header from "../pages/header";
 import { HomePage, CatalogPage } from "../pages";
 import Footer from "../pages/footer";
+import {CatalogIpads, CatalogIphones} from "../sw-components/device-catalog";
+import ProductCart from "../product-cart/product-cart";
 
 const App = () => {
     return (
@@ -16,7 +18,15 @@ const App = () => {
                     exact />
                 <Route
                     path={"/iphone/"}
-                    component={CatalogPage}
+                    component={CatalogIphones}
+                    exact />
+                <Route
+                    path={"/ipad/"}
+                    component={CatalogIpads}
+                    exact />
+                <Route
+                    path={"/mac/"}
+                    component={<ProductCart class = {"iphone"} id = {"101"}/>}
                     exact />
             </Switch>
             {/*<Footer />*/}
