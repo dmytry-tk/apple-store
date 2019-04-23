@@ -3,7 +3,7 @@ import {fetchDevices} from "../actions";
 import {compose} from "redux";
 import {withService} from "../components/hoc/with-service";
 import {connect} from "react-redux";
-import Catalog from "../components/catalog";
+import Catalog from "../components/catalog-directory/catalog";
 import ErrorIndicator from "../components/error-indicator";
 import Spinner from "../components/spinner";
 

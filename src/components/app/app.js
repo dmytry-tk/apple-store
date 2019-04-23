@@ -2,7 +2,7 @@ import React from 'react';
 import './app.sass'
 import { Route, Switch } from 'react-router-dom'
 import Header from "../pages/header";
-import { HomePage, CatalogPage } from "../pages";
+import { HomePage, CatalogPage, CartPage } from "../pages";
 import Footer from "../pages/footer";
 import {CatalogIpads, CatalogIphones} from "../sw-components/device-catalog";
 import ProductCartContainer from "../../containers/product-cart-container";
@@ -29,6 +29,10 @@ const App = () => {
                     render={({match, location, history}) => {
                         return <ProductCartContainer deviceClass = {match.params.class} deviceId = {match.params.id}/>
                     }}
+                    exact/>
+                <Route
+                    path={"/cart"}
+                    component={CartPage}
                     exact/>
             </Switch>
             {/*<Footer />*/}

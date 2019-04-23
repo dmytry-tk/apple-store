@@ -5,7 +5,7 @@ import ProductCart from "../components/product-cart";
 import Spinner from "../components/spinner";
 import ErrorIndicator from "../components/error-indicator";
 import {withService} from "../components/hoc/with-service";
-import {fetchDevice} from "../actions";
+import {fetchDevice, addDeviceToCart} from "../actions";
 
 class ProductCartContainer extends Component{
 
@@ -14,7 +14,7 @@ class ProductCartContainer extends Component{
     }
 
     render(){
-        const { currentDevice, loading, error } = this.props
+        const { currentDevice, loading, error, addDeviceToCart} = this.props
 
         if (loading) {
             return <Spinner/>
@@ -24,7 +24,9 @@ class ProductCartContainer extends Component{
             return <ErrorIndicator/>
         }
 
-        return <ProductCart device = {currentDevice}/>
+        return <ProductCart
+            device = {currentDevice}
+            addDeviceToCart={() => addDeviceToCart(currentDevice)}/>
     }
 
 }
@@ -36,7 +38,8 @@ const mapStateToProps = ({ deviceList:{currentDevice, loading, error} }) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
     const { service, deviceClass, deviceId } = ownProps
     return {
-        fetchDevice: fetchDevice(service.getDevice, deviceClass, deviceId, dispatch)
+        fetchDevice: fetchDevice(service.getDevice, deviceClass, deviceId, dispatch),
+        addDeviceToCart: (device) => dispatch(addDeviceToCart(device))
     }
 };
 
