@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './catalog.sass'
 import CatalogItem from "../catalog-item";
 import './catalog.sass'

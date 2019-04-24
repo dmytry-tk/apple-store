@@ -2,8 +2,7 @@ import React from 'react';
 import './app.sass'
 import { Route, Switch } from 'react-router-dom'
 import Header from "../pages/header";
-import { HomePage, CatalogPage, CartPage } from "../pages";
-import Footer from "../pages/footer";
+import { HomePage, CartPage } from "../pages";
 import {CatalogIpads, CatalogIphones} from "../sw-components/device-catalog";
 import ProductCartContainer from "../../containers/product-cart-container";
 

@@ -3,30 +3,36 @@ import connect from "react-redux/es/connect/connect";
 import React, {Component} from "react";
 import Cart from "../components/cart-directory/cart";
 import {withService} from "../components/hoc/with-service";
-import {allDevicesRemovedFromCart, deviceAddedToCart, deviceRemovedFromCart} from "../actions";
+import {
+    deviceDecreaseCount,
+    deviceIncreaseCount,
+    deviceRemovedFromCart,
+    clearCart
+} from "../actions";
 
 class CartContainer extends Component {
 
     render() {
-        const {cartItems, onIncrease, onDelete, onDecrease } = this.props
+        const {cartItems, onIncrease, onDelete, onDecrease, total, clearCart } = this.props
         return <Cart
             cartList={cartItems}
+            total={total}
             onIncrease={onIncrease}
             onDelete={onDelete}
+            clearCart={clearCart}
             onDecrease={onDecrease}/>
     }
 }
 
-const mapStateToProps = ({ cartList:{cartItems} }) => {
-    return { cartItems }
+const mapStateToProps = ({ cartList:{cartItems, orderTotal } }) => {
+    return { cartItems, total:orderTotal }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        onIncrease: deviceAddedToCart,
-        onDecrease: deviceRemovedFromCart,
-        onDelete: allDevicesRemovedFromCart,
-    }
+const mapDispatchToProps = {
+    onIncrease: deviceIncreaseCount,
+    onDecrease: deviceDecreaseCount,
+    onDelete: deviceRemovedFromCart,
+    clearCart: clearCart,
 };
 
 export default compose(

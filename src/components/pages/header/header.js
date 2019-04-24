@@ -2,8 +2,11 @@ import React from 'react';
 import './header.sass'
 import {Link} from "react-router-dom";
 import logo from "./apple-logo.png"
+import {compose} from "redux";
+import {withService} from "../../hoc/with-service";
+import connect from "react-redux/es/connect/connect";
 
-const Header = () => {
+const Header = ({total, count}) => {
     return(
         <header className={'header'}>
             <div className="header-logo">
@@ -21,14 +24,27 @@ const Header = () => {
                 </ul>
             </div>
             <Link to={'/cart/'} className="header-cart">
-                <div className="sum">0$</div>
+                <div className="sum">{total}$</div>
                 <div className = {'cart-box'}>
                     <i className="fas fa-shopping-cart"></i>
-                    <span className="cart-count">0</span>
+                    <span className="cart-count">{count}</span>
                 </div>
             </Link>
         </header>
     )
 }
 
-export default Header
+const mapStateToProps = ({ cartList:{orderTotal, orderCount } }) => {
+    return {
+        total:orderTotal,
+        count: orderCount
+    }
+}
+
+const mapDispatchToProps = {
+};
+
+export default compose(
+    withService(),
+    connect(mapStateToProps, mapDispatchToProps)
+)(Header)

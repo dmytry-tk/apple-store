@@ -5,7 +5,7 @@ const CartItem = ({item, ind, onIncrease, onDelete, onDecrease }) => {
     const {deviceId:id} = item
 
     return(
-        <tr>
+        <tr key = {ind}>
             <td>{ind+1}</td>
             <td>{item.model}</td>
             <td><img src={item.img} alt=""/></td>

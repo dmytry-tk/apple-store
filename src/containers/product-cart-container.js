@@ -11,6 +11,13 @@ class ProductCartContainer extends Component{
 
     componentDidMount() {
         this.props.fetchDevice()
+        console.log(this.props)
+    }
+
+    checkCart = (id) => {
+        const {cartItems:items} = this.props
+        const res = items.findIndex(({deviceId}) => deviceId === id)
+        return res != -1
     }
 
     render(){
@@ -26,13 +33,14 @@ class ProductCartContainer extends Component{
 
         return <ProductCart
             device = {currentDevice}
+            addedToCart={this.checkCart(currentDevice.deviceId)}
             addDeviceToCart={() => addDeviceToCart(currentDevice)}/>
     }
 
 }
 
-const mapStateToProps = ({ deviceList:{currentDevice, loading, error} }) => {
-    return { currentDevice, loading, error }
+const mapStateToProps = ({ deviceList:{currentDevice, loading, error}, cartList:{cartItems} }) => {
+    return { currentDevice, loading, error, cartItems }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {

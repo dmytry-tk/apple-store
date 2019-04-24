@@ -46,30 +46,32 @@ const addDeviceToCart = (device) => {
         payload: device
     }
 }
-export const deviceAddedToCart = (deviceId) => {
-    console.log("111111")
+export const deviceIncreaseCount = (deviceId) => {
     return {
-        type: 'BOOK_ADDED_TO_CART',
+        type: 'DEVICE_INCREASE_COUNT',
         payload: deviceId
     }
 };
 
-export const allDevicesRemovedFromCart = (deviceId) => {
-    console.log("111111")
+export const deviceDecreaseCount = (deviceId) => {
     return {
-        type: 'ALL_BOOKS_REMOVED_FROM_CART',
+        type: 'DEVICE_DECREASE_COUNT',
         payload: deviceId
     }
 };
 
 export const deviceRemovedFromCart = (deviceId) => {
-    console.log("111111")
     return {
-        type: 'BOOK_REMOVED_FROM_CART',
+        type: 'DEVICE_REMOVED_FROM_CART',
         payload: deviceId
     }
 };
 
+export const clearCart = () => {
+    return {
+        type: 'CLEAR_CART',
+    }
+};
 
 export {
   fetchDevices,

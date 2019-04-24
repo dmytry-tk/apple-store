@@ -1,10 +1,10 @@
 import {updateDeviceList} from "./device-list";
-import {updateCartList} from "./cart-list";
+import {updateCart} from "./cart-list";
 
 const reducer = (state, action) => {
     return {
         deviceList: updateDeviceList(state, action),
-        cartList: updateCartList(state, action),
+        cartList: updateCart(state, action),
     }
 }
 export default reducer
