@@ -26,21 +26,48 @@ const devicesError = (error) => {
     }
 }
 
-const fetchDevices = (getDevices, dispatch) => () => {
+export const fetchDevices = (getDevices, dispatch) => () => {
     dispatch(devicesRequested())
-    getDevices()
+    getDevices
         .then((data) => dispatch(devicesLoaded(data)))
         .catch((err) => dispatch(devicesError(err)))
 }
 
-const fetchDevice = (getDevice, deviceClass, deviceId, dispatch) => () => {
+export const fetchDevice = (getDevice, dispatch) => () => {
     dispatch(devicesRequested())
-    getDevice(deviceClass, deviceId)
+    getDevice
         .then((data) => dispatch(deviceLoaded(data)))
         .catch((err) => dispatch(devicesError(err)))
+};
+
+const userLoaded = (user) => {
+    return {
+        type: 'FETCH_PROFILE_LOADED',
+        payload: user
+    }
 }
 
-const addDeviceToCart = (device) => {
+const userRequested = () => {
+    return {
+        type: 'FETCH_PROFILE_REQUESTED'
+    }
+}
+
+const userError = (error) => {
+    return{
+        type: 'FETCH_PROFILE_ERROR',
+        payload: error
+    }
+}
+
+export const fetchProfile = (getUser, dispatch) => {
+    dispatch(userRequested());
+    getUser
+        .then((data) => dispatch(userLoaded(data)))
+        .catch((err) => dispatch(userError(err)))
+};
+
+export const addDeviceToCart = (device) => {
     return{
         type: 'ADD_DEVICE_TO_CART',
         payload: device
@@ -73,8 +100,15 @@ export const clearCart = () => {
     }
 };
 
-export {
-  fetchDevices,
-  fetchDevice,
-  addDeviceToCart
+export const closeModal = () => {
+    return {
+        type: 'CLOSE_MODAL',
+    }
+};
+
+export const openModal = (modal) => {
+    return {
+        type: 'OPEN_MODAL',
+        payload: modal
+    }
 };

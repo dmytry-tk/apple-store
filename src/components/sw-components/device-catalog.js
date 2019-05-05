@@ -3,12 +3,12 @@ import CatalogContainer from "../../containers/catalog-container";
 
 export const CatalogIphones = () => {
     return (
-        <CatalogContainer getDevice = "getIphones"/>
+        <CatalogContainer deviceClass = "iphone"/>
     )
-}
+};
 
 export const CatalogIpads = () => {
     return (
-        <CatalogContainer getDevice="getIpads"/>
+        <CatalogContainer deviceClass = "ipad"/>
     )
-}
+};

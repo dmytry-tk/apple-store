@@ -20,7 +20,7 @@ class CatalogContainer extends Component {
     }
 
     render() {
-        const { devices, loading, error } = this.props
+        const { devices, loading, error } = this.props;
 
         if (loading) {
             return <Spinner/>
@@ -38,9 +38,9 @@ const mapStateToProps = ({ deviceList:{devices, loading, error} }) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-    const { service, getDevice } = ownProps
+    const { service, deviceClass } = ownProps;
     return {
-        fetchDevices: fetchDevices(service[getDevice], dispatch)
+        fetchDevices: fetchDevices(service.getDevices(deviceClass), dispatch)
     }
 };
 

@@ -5,23 +5,22 @@ import ProductCart from "../components/product-cart";
 import Spinner from "../components/spinner";
 import ErrorIndicator from "../components/error-indicator";
 import {withService} from "../components/hoc/with-service";
-import {fetchDevice, addDeviceToCart} from "../actions";
+import {fetchDevice, addDeviceToCart, openModal} from "../actions";
 
 class ProductCartContainer extends Component{
 
     componentDidMount() {
         this.props.fetchDevice()
-        console.log(this.props)
-    }
+    };
 
     checkCart = (id) => {
-        const {cartItems:items} = this.props
-        const res = items.findIndex(({deviceId}) => deviceId === id)
-        return res != -1
-    }
+        const {cartItems:items} = this.props;
+        const res = items.findIndex(({_id}) => _id === id);
+        return res !== -1
+    };
 
     render(){
-        const { currentDevice, loading, error, addDeviceToCart} = this.props
+        const { currentDevice, loading, error, addDeviceToCart, isLogin, openModal} = this.props;
 
         if (loading) {
             return <Spinner/>
@@ -33,21 +32,30 @@ class ProductCartContainer extends Component{
 
         return <ProductCart
             device = {currentDevice}
-            addedToCart={this.checkCart(currentDevice.deviceId)}
+            addedToCart={this.checkCart(currentDevice._id)}
+            isLogin={isLogin}
+            openModal={(modal) => openModal(modal)}
             addDeviceToCart={() => addDeviceToCart(currentDevice)}/>
     }
 
 }
 
-const mapStateToProps = ({ deviceList:{currentDevice, loading, error}, cartList:{cartItems} }) => {
-    return { currentDevice, loading, error, cartItems }
-}
+const mapStateToProps = ({ deviceList:{currentDevice, loading, error}, cartList:{cartItems}, profileList:{isLogin} }) => {
+    return {
+        currentDevice,
+        loading,
+        error,
+        cartItems,
+        isLogin
+    }
+};
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-    const { service, deviceClass, deviceId } = ownProps
+    const { service, deviceClass, deviceId } = ownProps;
     return {
-        fetchDevice: fetchDevice(service.getDevice, deviceClass, deviceId, dispatch),
-        addDeviceToCart: (device) => dispatch(addDeviceToCart(device))
+        fetchDevice: fetchDevice(service.getDevice(deviceClass, deviceId),  dispatch),
+        addDeviceToCart: (device) => dispatch(addDeviceToCart(device)),
+        openModal: (modal) => dispatch(openModal(modal))
     }
 };
 

@@ -1,15 +1,15 @@
 import React from 'react'
 import './catalog.sass'
 import CatalogItem from "../catalog-item";
-import './catalog.sass'
 
 const Catalog = ({ devices }) => {
     return(
         <div className = "catalog wrap">
             {
-                devices.map((device) => {
+                devices.map((device, idx) => {
                     return (
                         <CatalogItem
+                            key = {idx}
                             device = {device}/>
                     )
                 })

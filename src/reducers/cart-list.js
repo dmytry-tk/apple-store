@@ -43,11 +43,11 @@ const updateTotal = (items) => {
     let itemCount = 0;
     items.map(({price, count}) => {
         total += +price * +count;
-        itemCount += +count
-    })
+        itemCount += +count;
+    });
     const data = {
         total,
-        count:itemCount
+        count: itemCount
     }
     return data
 }

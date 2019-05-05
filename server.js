@@ -1,0 +1,102 @@
+var express = require('express');
+var app = express();
+var bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+var MongoClient = require('mongodb').MongoClient;
+var ObjectID = require('mongodb').ObjectID;
+var db;
+
+
+const urlencodedParser = bodyParser.urlencoded({extended: false});
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
+app.get('/user/:email/:password', function(req, res) {
+    db.collection(`users`).findOne({ password: `${req.params.password}`, email: `${req.params.email}` }, function (err, doc) {
+        res.send(doc);
+    })
+});
+
+app.get('/:devices', function(req, res) {
+    db.collection(`${req.params.devices}`).find().toArray(function (err, docs) {
+        if (err) {
+            return res.sendStatus(500);
+        }
+        res.send(docs);
+    })
+});
+
+app.get('/:device/:id', function(req, res) {
+    db.collection(`${req.params.device}`).findOne({_id: ObjectID(req.params.id)}, function (err, doc) {
+        if (err) {
+            return res.sendStatus(500);
+        }
+        res.send(doc);
+    })
+});
+// app.listen(3012, function () {
+//     console.log('API app started')
+// })
+
+
+// app.post(`/register/:email/:username/:phone/:password`, function (req, res) {
+//     var user = {
+//         name: req.body.name
+//     };
+//     db.collection('users').insert(user, function (err, result) {
+//         if(err) {
+//             console.log(err);
+//             return res.sendStatus(500);
+//         }
+//         res.send(user);
+// })
+
+app.post('/register', (req, res, next) => {
+    let insertToDB = false;
+    const { username, email, phone, password } = req.body;
+    const note = {
+        username: username,
+        email: email,
+        phone: phone,
+        password: password,
+    };
+    db.collection(`users`).findOne({email: email}, (err, data) => {
+        if(err){
+            res.send({ 'error': 'Something went wrong' });
+        }
+        if(data){
+            res.status(300).send({ 'error' : "This email is already registered. Log in to your account"});
+        } else {
+            insertToDB = true
+        }
+        if( insertToDB ) {
+            db.collection('users').insert(note, (err1, result) => {
+                if (err1) {
+                    res.send({ 'error': 'An error has occurred' });
+                }
+                else {
+                    res.send(result.ops[0]);
+                }
+            });
+        }
+
+
+
+    });
+});
+
+MongoClient.connect('mongodb://localhost:27017/appleStore', (err, database) => {
+    if (err) {
+        return console.log(err);
+    }
+    db = database;
+    app.listen(3012,function () {
+        console.log('API app started');
+    })
+});

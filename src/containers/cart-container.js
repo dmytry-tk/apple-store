@@ -13,7 +13,7 @@ import {
 class CartContainer extends Component {
 
     render() {
-        const {cartItems, onIncrease, onDelete, onDecrease, total, clearCart } = this.props
+        const {cartItems, onIncrease, onDelete, onDecrease, total, clearCart } = this.props;
         return <Cart
             cartList={cartItems}
             total={total}
@@ -25,7 +25,10 @@ class CartContainer extends Component {
 }
 
 const mapStateToProps = ({ cartList:{cartItems, orderTotal } }) => {
-    return { cartItems, total:orderTotal }
+    return {
+        cartItems,
+        total:orderTotal,
+    }
 }
 
 const mapDispatchToProps = {

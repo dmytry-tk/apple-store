@@ -1,7 +1,7 @@
 import React from 'react'
 import './product-cart.sass'
 
-const ProductCart = ({device, addDeviceToCart, addedToCart}) => {
+const ProductCart = ({device, addDeviceToCart, addedToCart, isLogin, openModal}) => {
     const{model, price, description, img} = device
     return(
         <div className = {"product-cart"}>
@@ -17,7 +17,8 @@ const ProductCart = ({device, addDeviceToCart, addedToCart}) => {
                         addedToCart?
                             <div className="item added button">Added to cart <i className="fas fa-check"></i></div>
                             :
-                            <div className="item button" onClick={() => addDeviceToCart()}>Add To Cart</div>
+                            <div className="item button"
+                                 onClick={() => isLogin? addDeviceToCart() : openModal("login") }>Add To Cart</div>
                     }
                 </div>
             </div>
