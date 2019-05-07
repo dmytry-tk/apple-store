@@ -1,0 +1,24 @@
+.slider-container
+    background-color: #000
+    .slide
+        width: 100%
+        outline: none
+        .slide-item
+            height: calc(100vh - 90px)
+            -webkit-background-size: cover
+            background-size: cover
+            background-position: center center
+    .slick-dots
+        bottom: 50px
+        li
+            &.slick-active
+                button
+                    opacity: 1
+            button
+                width: 10px
+                height: 10px
+                background-color: white
+                border-radius: 100%
+                opacity: 0.5
+                &::before
+                    font-size: 0

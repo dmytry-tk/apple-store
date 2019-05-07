@@ -20,6 +20,7 @@ const Cart = ({cartList = [], onIncrease, onDelete, onDecrease, total, clearCart
                         cartList.map((item, ind) => {
                             return <CartItem
                                 item={item}
+                                key={ind}
                                 ind={ind}
                                 onIncrease={onIncrease}
                                 onDelete={onDelete}

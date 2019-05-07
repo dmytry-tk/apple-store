@@ -53,10 +53,10 @@ const updateTotal = (items) => {
 }
 
 
-const updateOrder = (state, deviceId, quantity) => {
+const updateOrder = (state, id, quantity) => {
     const {cartItems: items} = state.cartList
-    const item = items.find(({deviceId:id}) => id === deviceId)
-    const itemIndex = items.findIndex(({deviceId:id}) => id === deviceId);
+    const item = items.find(({_id}) => _id === id)
+    const itemIndex = items.findIndex(({_id}) => _id === id);
     const newItem = updateCartItem(item, quantity)
     const newItems = updateCartItems(items, newItem, itemIndex)
     const {total, count} = updateTotal(newItems)
@@ -85,14 +85,14 @@ export const updateCart = (state, action) => {
         case 'DEVICE_DECREASE_COUNT':
             return updateOrder(state, action.payload, -1)
         case 'DEVICE_REMOVED_FROM_CART':
-            const item = state.cartList.cartItems.find((el) => el.deviceId === action.payload);
+            const item = state.cartList.cartItems.find((el) => el._id === action.payload);
             return updateOrder(state, action.payload, -item.count)
         case 'CLEAR_CART':
             return {
                 cartItems: [],
                 orderTotal: 0,
                 orderCount:0
-            }
+            };
         default:
             return state.cartList
     }

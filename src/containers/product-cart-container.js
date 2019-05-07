@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {compose} from "redux";
-import connect from "react-redux/es/connect/connect";
+import {connect} from "react-redux";
 import ProductCart from "../components/product-cart";
 import Spinner from "../components/spinner";
 import ErrorIndicator from "../components/error-indicator";

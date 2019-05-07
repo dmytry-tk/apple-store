@@ -1,7 +1,12 @@
 import React from 'react'
+import SimpleSlider from "../slider";
 
 const HomePage = () => {
-    return <div>HomePage</div>
+    return(
+    <div>
+        <SimpleSlider />
+    </div>
+    )
 };
 
 export default HomePage

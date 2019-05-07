@@ -4,7 +4,6 @@ import {updateModals} from "./modals-list";
 import {updateProfile} from "./profile";
 
 const reducer = (state, action) => {
-    console.log("main state", state)
     return {
         deviceList: updateDeviceList(state, action),
         cartList: updateCart(state, action),

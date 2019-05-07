@@ -12,7 +12,6 @@ export default class Service {
 
     postResource = async (url = "", body) => {
         const { username, email, phone, password } = body;
-        console.log(username, email, phone, password);
         const res  = await fetch("http://localhost:3012/register", {
             method: 'post',
             headers: {
@@ -21,11 +20,11 @@ export default class Service {
             body: `username=${username}&email=${email}&phone=${phone}&password=${password}`
 
         });
-        const resault = await res.json()
+        const result = await res.json();
         if (!res.ok) {
-            throw new Error(`${resault.error}`)
+            throw new Error(`${result.error}`)
         }
-        return resault;
+        return result;
     };
 
     getDevices = async (deviceClass) => {
@@ -40,13 +39,17 @@ export default class Service {
     };
 
     getUser = async (email, password) => {
-        const user = await this.getResource(`/user/${email}/${password}`);
-        return user;
+        const res = await fetch(`${this._apiBase}/user/${email}/${password}`);
+        console.log(res)
+        const result = await res.json();
+        if (!res.ok) {
+            throw new Error(`${result.error}`)
+        }
+        return await result;
     };
 
     postRegisterNewUser = async (body) => {
         const res = await this.postResource(`/register`, body);
-        console.log("111111111", res)
         return res;
     };
 

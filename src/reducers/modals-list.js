@@ -1,7 +1,7 @@
 
 const updateModals = (state, action) => {
     if (state === undefined) {
-        return {registration: true}
+        return {}
     }
     switch (action.type) {
         case 'OPEN_MODAL':

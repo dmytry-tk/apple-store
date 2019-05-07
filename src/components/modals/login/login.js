@@ -1,69 +1,10 @@
-import React, {Component} from 'react'
+import Success from "../success";
+import React from 'react'
 import "./login.sass"
 import "../bottom-modals.sass"
-import {closeModal, fetchProfile, openModal} from "../../../actions";
-import {compose} from "redux";
-import {withService} from "../../hoc/with-service";
-import connect from "react-redux/es/connect/connect";
-import Success from "../success";
-
-class LoginContainer extends Component {
-
-    state = {
-        error: null,
-    };
-
-    onSubmit = (e) => {
-        e.preventDefault();
-        const email = document.getElementById("sign-in-email").value;
-        const password = document.getElementById("sign-in-password").value;
-        this.props.fetchProfile(email, password)
-    };
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        const { error } = this.props.profileList;
-        if (prevState.error != error){
-            this.setState({error})
-        }
-    }
-
-    render() {
-        const { closeModal, openModal, profileList } = this.props;
-        const { error } = this.state;
-        return(
-            <Login onSubmit={this.onSubmit}
-                   openModal={(modal) => openModal(modal)}
-                   profileList={profileList}
-                   error={error}
-                   closeModal={closeModal}/>
-        )
-    }
-}
-
-const mapStateToProps = ({ profileList }) => {
-    return {
-        profileList: profileList,
-    }
-};
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-    const { service } = ownProps;
-    return{
-        closeModal: () => dispatch(closeModal()),
-        openModal: (modal) => dispatch(openModal(modal)),
-        fetchProfile: ( email, password ) => fetchProfile(service.getUser(email, password), dispatch )
-    }
-};
-
-export default compose(
-    withService(),
-    connect(mapStateToProps, mapDispatchToProps)
-)(LoginContainer)
-
 
 const Login = ({onSubmit, closeModal, openModal, profileList, error}) => {
-    console.log(profileList)
-    const {profile, loading, isLogin} = profileList;
+    const {profile, isLogin} = profileList;
 
     return(
         <div className = "overlay">
@@ -85,6 +26,7 @@ const Login = ({onSubmit, closeModal, openModal, profileList, error}) => {
                             className={"input"}
                             placeholder="Email..."
                             defaultValue={"dmytro.tkachuk@nure.ua"}
+                            autoComplete={"username"}
                             required/>
                         <input
                             type="password"
@@ -92,6 +34,7 @@ const Login = ({onSubmit, closeModal, openModal, profileList, error}) => {
                             className={"input"}
                             placeholder={"Password..."}
                             defaultValue={"123456"}
+                            autoComplete={"current-password"}
                             required/>
                         <div className={"form-error"}>{error ? error : ""}</div>
                     </div>
@@ -108,4 +51,6 @@ const Login = ({onSubmit, closeModal, openModal, profileList, error}) => {
             </div>
         </div>
     )
-}
+};
+
+export default Login

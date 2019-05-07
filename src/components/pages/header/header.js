@@ -1,12 +1,12 @@
 import React from 'react';
 import './header.sass'
 import {Link} from "react-router-dom";
-import logo from "./apple-logo.png"
+import logo from "./logo.jpg"
 import {compose} from "redux";
 import {withService} from "../../hoc/with-service";
 import connect from "react-redux/es/connect/connect";
-import LoginContainer from "../../modals/login";
-import RegistrationContainer from "../../modals/registration";
+import LoginContainer from "../../../containers/login-container";
+import RegistrationContainer from "../../../containers/registration-container";
 import { openModal } from "../../../actions";
 
 const Header = ({total, count, modals, profile, openModal}) => {

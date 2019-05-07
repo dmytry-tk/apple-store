@@ -18,8 +18,19 @@ app.use(function(req, res, next) {
 });
 
 app.get('/user/:email/:password', function(req, res) {
-    db.collection(`users`).findOne({ password: `${req.params.password}`, email: `${req.params.email}` }, function (err, doc) {
-        res.send(doc);
+    db.collection(`users`).findOne({ email: `${req.params.email}` }, function (err, doc) {
+        if(err) {
+            res.send({ 'error': 'Something went wrong with server' });
+        }
+        else if(!doc) {
+            res.status(300).send({ 'error' : "this email is not registered"});
+        }
+        else if(req.params.password !== doc.password) {
+            res.status(300).send({ 'error' : "Incorrect password"});
+        }
+        else{
+            res.send(doc);
+        }
     })
 });
 
@@ -68,7 +79,7 @@ app.post('/register', (req, res, next) => {
     };
     db.collection(`users`).findOne({email: email}, (err, data) => {
         if(err){
-            res.send({ 'error': 'Something went wrong' });
+            res.send({ 'error': 'Something went wrong with server' });
         }
         if(data){
             res.status(300).send({ 'error' : "This email is already registered. Log in to your account"});
@@ -91,7 +102,7 @@ app.post('/register', (req, res, next) => {
     });
 });
 
-MongoClient.connect('mongodb://localhost:27017/appleStore', (err, database) => {
+MongoClient.connect('mongodb://admin:Qwerty_13@applestore-shard-00-00-keonv.mongodb.net:27017,applestore-shard-00-01-keonv.mongodb.net:27017,applestore-shard-00-02-keonv.mongodb.net:27017/appleStore?ssl=true&replicaSet=appleStore-shard-0&authSource=admin&retryWrites=true', (err, database) => {
     if (err) {
         return console.log(err);
     }

@@ -1,5 +1,5 @@
 import {compose} from "redux";
-import connect from "react-redux/es/connect/connect";
+import {connect} from "react-redux";
 import React, {Component} from "react";
 import Cart from "../components/cart-directory/cart";
 import {withService} from "../components/hoc/with-service";

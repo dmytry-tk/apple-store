@@ -40,57 +40,36 @@ export const fetchDevice = (getDevice, dispatch) => () => {
         .catch((err) => dispatch(devicesError(err)))
 };
 
-const userLoaded = (user) => {
-    return {
-        type: 'FETCH_PROFILE_LOADED',
+export const addCurrentUser = (user) => {
+    return{
+        type: 'ADD_CURRENT_USER',
         payload: user
     }
-}
-
-const userRequested = () => {
-    return {
-        type: 'FETCH_PROFILE_REQUESTED'
-    }
-}
-
-const userError = (error) => {
-    return{
-        type: 'FETCH_PROFILE_ERROR',
-        payload: error
-    }
-}
-
-export const fetchProfile = (getUser, dispatch) => {
-    dispatch(userRequested());
-    getUser
-        .then((data) => dispatch(userLoaded(data)))
-        .catch((err) => dispatch(userError(err)))
 };
-
 export const addDeviceToCart = (device) => {
     return{
         type: 'ADD_DEVICE_TO_CART',
         payload: device
     }
 }
-export const deviceIncreaseCount = (deviceId) => {
+export const deviceIncreaseCount = (_id) => {
     return {
         type: 'DEVICE_INCREASE_COUNT',
-        payload: deviceId
+        payload: _id
     }
 };
 
-export const deviceDecreaseCount = (deviceId) => {
+export const deviceDecreaseCount = (_id) => {
     return {
         type: 'DEVICE_DECREASE_COUNT',
-        payload: deviceId
+        payload: _id
     }
 };
 
-export const deviceRemovedFromCart = (deviceId) => {
+export const deviceRemovedFromCart = (_id) => {
     return {
         type: 'DEVICE_REMOVED_FROM_CART',
-        payload: deviceId
+        payload: _id
     }
 };
 
