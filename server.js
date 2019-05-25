@@ -4,12 +4,9 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-var MongoClient = require('mongodb').MongoClient;
-var ObjectID = require('mongodb').ObjectID;
-var db;
-
-
-const urlencodedParser = bodyParser.urlencoded({extended: false});
+let MongoClient = require('mongodb').MongoClient;
+let ObjectID = require('mongodb').ObjectID;
+let db;
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -51,22 +48,6 @@ app.get('/:device/:id', function(req, res) {
         res.send(doc);
     })
 });
-// app.listen(3012, function () {
-//     console.log('API app started')
-// })
-
-
-// app.post(`/register/:email/:username/:phone/:password`, function (req, res) {
-//     var user = {
-//         name: req.body.name
-//     };
-//     db.collection('users').insert(user, function (err, result) {
-//         if(err) {
-//             console.log(err);
-//             return res.sendStatus(500);
-//         }
-//         res.send(user);
-// })
 
 app.post('/register', (req, res, next) => {
     let insertToDB = false;
@@ -99,6 +80,25 @@ app.post('/register', (req, res, next) => {
 
 
 
+    });
+});
+
+app.post('/order', (req, res, next) => {
+    const { userId, cartList:{ cartItems, orderTotal, orderCount } } = req.body.body;
+    const note = {
+        userId: userId,
+        order: cartItems,
+        orderTotal: orderTotal,
+        orderCount: orderCount,
+        orderStatus: "pending"
+    };
+    db.collection('orders').insert(note, (err, result) => {
+        if (err) {
+            res.send({ 'error': 'An error has occurred' });
+        }
+        else {
+            res.send(result.ops[0]);
+        }
     });
 });
 

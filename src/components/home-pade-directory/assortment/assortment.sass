@@ -9,10 +9,32 @@
             .link
                 .item
                     background-color: #fff
+                    box-shadow: 0 5px 15px rgba(0, 0, 0, .25)
                     display: flex
-                    justify-content: center
+                    justify-content: space-between
+                    padding: 20px 15px
                     align-items: center
                     flex-direction: column
+                    height: 100%
+                    transition: .25s all ease
+                    &:hover
+                        box-shadow: 0 5px 30px rgba(0, 0, 0, .25)
+                        .title
+                            color: black
+                        img
+                            transform: scale(1.02)
                     .img
+                        height: 260px
+                        display: flex
+                        align-items: center
+                        justify-content: center
+                        img
+                            max-width: 90%
+                            transition: .25s all ease
                     .title
+                        font-size: 24px
+                        color: #b0b0b0
+                        margin-top: 10px
+                        -webkit-transition: .25s all ease
+                        transition: .25s all ease
                 

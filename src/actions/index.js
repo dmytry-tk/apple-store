@@ -91,3 +91,4 @@ export const openModal = (modal) => {
         payload: modal
     }
 };
+

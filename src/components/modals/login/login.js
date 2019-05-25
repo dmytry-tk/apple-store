@@ -25,7 +25,7 @@ const Login = ({onSubmit, closeModal, openModal, profileList, error}) => {
                             id={"sign-in-email"}
                             className={"input"}
                             placeholder="Email..."
-                            defaultValue={"dmytro.tkachuk@nure.ua"}
+                            defaultValue={"dmytry.tk@gmail.com"}
                             autoComplete={"username"}
                             required/>
                         <input
@@ -33,7 +33,7 @@ const Login = ({onSubmit, closeModal, openModal, profileList, error}) => {
                             id={"sign-in-password"}
                             className={"input"}
                             placeholder={"Password..."}
-                            defaultValue={"123456"}
+                            defaultValue={"1111"}
                             autoComplete={"current-password"}
                             required/>
                         <div className={"form-error"}>{error ? error : ""}</div>

@@ -2,8 +2,9 @@ import React from 'react'
 import CartItem from "../cart-item";
 import "./cart.sass"
 
-const Cart = ({cartList = [], onIncrease, onDelete, onDecrease, total, clearCart}) => {
-    const cartLength = cartList.length? true : false
+const Cart = ({cartList:{cartItems, total}, onIncrease, onDelete, onDecrease, clearCart, makeOrder}) => {
+    console.log(cartItems)
+    const cartLength = cartItems.length? true : false
     const table = (<div>
             <table border="1">
                 <tbody>
@@ -17,7 +18,7 @@ const Cart = ({cartList = [], onIncrease, onDelete, onDecrease, total, clearCart
                         <th>Actions</th>
                     </tr>
                     {
-                        cartList.map((item, ind) => {
+                        cartItems.map((item, ind) => {
                             return <CartItem
                                 item={item}
                                 key={ind}
@@ -30,10 +31,13 @@ const Cart = ({cartList = [], onIncrease, onDelete, onDecrease, total, clearCart
                 </tbody>
             </table>
             <div className = {"total"}>Total: {total}$</div>
-            <div className="clearCart button" onClick={() => clearCart()}>Clear cart</div>
-        </div>)
+            <div className="button-container">
+                <div className="clearCart button" onClick={() => clearCart()}>Clear cart</div>
+                <div className="makeOrder button" onClick={() => makeOrder()}>Make order</div>
+            </div>
+        </div>);
 
-    const noItems = (<div>There are no items in your cart yet.</div>)
+    const noItems = (<div>There are no items in your cart yet.</div>);
     return (
         <div className = "cart">
             <div className = "wrap">
@@ -45,6 +49,6 @@ const Cart = ({cartList = [], onIncrease, onDelete, onDecrease, total, clearCart
             </div>
         </div>
     )
-}
+};
 
 export default Cart

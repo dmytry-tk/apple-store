@@ -7,27 +7,59 @@ import {
     deviceDecreaseCount,
     deviceIncreaseCount,
     deviceRemovedFromCart,
-    clearCart
+    clearCart,
 } from "../actions";
+import {Redirect} from "react-router-dom";
 
 class CartContainer extends Component {
 
+    state = {
+        error: false,
+        success: false
+    };
+
+    makeOrder = () => {
+        const {cartList, service:{postOrder}, profile } = this.props;
+        const body = {
+            cartList,
+            userId: profile._id
+        };
+        postOrder(body)
+            .then(() => {
+                this.setState({
+                    success: true,
+                    error: false,
+                })
+            })
+            .catch((error) => {
+                console.log("error", error)
+            })
+    };
+
     render() {
-        const {cartItems, onIncrease, onDelete, onDecrease, total, clearCart } = this.props;
+        const {cartList, onIncrease, onDelete, onDecrease, clearCart } = this.props;
+        if( this.state.success ) {
+            clearCart();
+            return (
+                <div>
+                    <Redirect to = '/thank-page'/>
+                </div>
+            )
+        }
         return <Cart
-            cartList={cartItems}
-            total={total}
+            cartList={cartList}
             onIncrease={onIncrease}
             onDelete={onDelete}
             clearCart={clearCart}
+            makeOrder={this.makeOrder}
             onDecrease={onDecrease}/>
     }
 }
 
-const mapStateToProps = ({ cartList:{cartItems, orderTotal } }) => {
+const mapStateToProps = ({ cartList, profileList }) => {
     return {
-        cartItems,
-        total:orderTotal,
+        cartList,
+        profile: profileList.profile,
     }
 }
 

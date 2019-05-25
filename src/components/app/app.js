@@ -6,6 +6,7 @@ import { CartPage } from "../pages";
 import {CatalogIpads, CatalogIphones} from "../sw-components/device-catalog";
 import ProductCartContainer from "../../containers/product-cart-container";
 import HomePage from "../home-pade-directory/home-page";
+import ThankPage from "../pages/thank-page";
 
 const App = () => {
     return (
@@ -16,6 +17,11 @@ const App = () => {
                     path={"/"}
                     component={HomePage}
                     exact />
+                <Route
+                    path={"/thank-page"}
+                    component={ThankPage}
+                    exact />
+
                 <Route
                     path={"/iphone/"}
                     component={CatalogIphones}
