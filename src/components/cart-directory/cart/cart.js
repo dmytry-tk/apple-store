@@ -2,8 +2,7 @@ import React from 'react'
 import CartItem from "../cart-item";
 import "./cart.sass"
 
-const Cart = ({cartList:{cartItems, total}, onIncrease, onDelete, onDecrease, clearCart, makeOrder}) => {
-    console.log(cartItems)
+const Cart = ({cartList:{cartItems, orderTotal:total}, onIncrease, onDelete, onDecrease, clearCart, makeOrder}) => {
     const cartLength = cartItems.length? true : false
     const table = (<div>
             <table border="1">

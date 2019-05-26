@@ -49,6 +49,15 @@ app.get('/:device/:id', function(req, res) {
     })
 });
 
+app.get('/hot-sales', function(req, res) {
+    db.collection(`hot-sales`).find().toArray(function (err, docs) {
+        if (err) {
+            return res.sendStatus(500);
+        }
+        res.send(docs);
+    })
+});
+
 app.post('/register', (req, res, next) => {
     let insertToDB = false;
     const { username, email, phone, password } = req.body;

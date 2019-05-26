@@ -9,7 +9,7 @@ import {
     deviceRemovedFromCart,
     clearCart,
 } from "../actions";
-import {Redirect} from "react-router-dom";
+import {withRouter} from "react-router-dom";
 
 class CartContainer extends Component {
 
@@ -19,17 +19,15 @@ class CartContainer extends Component {
     };
 
     makeOrder = () => {
-        const {cartList, service:{postOrder}, profile } = this.props;
+        const {cartList, service:{postOrder}, profile, clearCart } = this.props;
         const body = {
             cartList,
             userId: profile._id
         };
         postOrder(body)
             .then(() => {
-                this.setState({
-                    success: true,
-                    error: false,
-                })
+                clearCart();
+                this.props.history.push('/thank-page');
             })
             .catch((error) => {
                 console.log("error", error)
@@ -38,14 +36,6 @@ class CartContainer extends Component {
 
     render() {
         const {cartList, onIncrease, onDelete, onDecrease, clearCart } = this.props;
-        if( this.state.success ) {
-            clearCart();
-            return (
-                <div>
-                    <Redirect to = '/thank-page'/>
-                </div>
-            )
-        }
         return <Cart
             cartList={cartList}
             onIncrease={onIncrease}
@@ -72,5 +62,5 @@ const mapDispatchToProps = {
 
 export default compose(
     withService(),
-    connect(mapStateToProps, mapDispatchToProps)
-)(CartContainer)
+    connect(mapStateToProps, mapDispatchToProps),
+)(withRouter(CartContainer))

@@ -21,7 +21,6 @@ const App = () => {
                     path={"/thank-page"}
                     component={ThankPage}
                     exact />
-
                 <Route
                     path={"/iphone/"}
                     component={CatalogIphones}
@@ -44,6 +43,6 @@ const App = () => {
             {/*<Footer />*/}
         </div>
     )
-}
+};
 
 export default App

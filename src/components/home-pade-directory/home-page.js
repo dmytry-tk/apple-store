@@ -1,12 +1,14 @@
 import React from 'react'
-import SimpleSlider from "../slider";
 import Assortment from "./assortment";
+import MainSlider from "./main-slider";
+import HotSalesContainer from "../../containers/hot-sales-container";
 
 const HomePage = () => {
     return(
     <div>
-        <SimpleSlider />
+        <MainSlider />
         <Assortment />
+        <HotSalesContainer />
     </div>
     )
 };

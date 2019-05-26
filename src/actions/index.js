@@ -92,3 +92,32 @@ export const openModal = (modal) => {
     }
 };
 
+export const fetchHotSales = (fetchHotSales, dispatch) => () => {
+    dispatch(hotSalesRequested())
+    fetchHotSales
+        .then((data) => dispatch(hotSalesLoaded(data)))
+        .catch((err) => dispatch(hotSaleError(err)))
+}
+
+const hotSaleError = (newDevices) => {
+    return {
+        type: 'FETCH_DEVICES_LOADED',
+        payload: newDevices
+    }
+}
+
+const hotSalesLoaded = (newDevice) => {
+    return {
+        type: 'FETCH_DEVICE_LOADED',
+        payload: newDevice
+    }
+}
+
+const hotSalesRequested = () => {
+    return {
+        type: 'FETCH_DEVICES_REQUESTED'
+    }
+}
+
+
+

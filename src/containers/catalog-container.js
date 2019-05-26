@@ -9,12 +9,6 @@ import Spinner from "../components/spinner";
 
 class CatalogContainer extends Component {
 
-    // componentDidMount() {
-    //     const { service } = this.props
-    //     const data = service.getPhones();
-    //
-    //     this.props.phonesLoaded(data)
-    // }
     componentDidMount() {
         this.props.fetchDevices()
     }

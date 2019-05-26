@@ -62,4 +62,12 @@ export default class Service {
         return result;
     };
 
+    fetchHotSales = async() => {
+        const res = await axios.get(`${this._apiBase}/hot-sales`);
+        if (res.status !== 200) {
+            throw new Error(`Could not fetch /hot-sales` + `, received ${res.status}`)
+        }
+        return res
+    }
+
 }

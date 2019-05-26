@@ -1,14 +1,11 @@
 import slide1 from "./1.jpg"
-import slide2 from "./2.jpg"
-import slide3 from "./3.jpg"
-import slide4 from "./4.jpg"
 import slide5 from "./5.jpg"
 import slide6 from "./6.jpg"
 import React, { Component } from "react";
-import Slider from "react-slick";
-import './slider.sass'
+import Slider from "react-slick/lib";
+import './main-slider.sass'
 
-export default class SimpleSlider extends Component {
+export default class MainSlider extends Component {
     render() {
         const settings = {
             dots: true,
@@ -23,7 +20,7 @@ export default class SimpleSlider extends Component {
             autoplaySpeed: 2000,
         };
         return (
-            <div className={"slider-container"}>
+            <div className={"main-slider-container"}>
                 <Slider {...settings}>
                     <div className="slide">
                         <div className="slide-item" style={{backgroundImage: `url(${ slide1 })`}}></div>
